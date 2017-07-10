@@ -1,7 +1,7 @@
 Puzzle 1
 ========
 
-Arguably the easiest puzzle as the puzzles generally got harder as they progressed. You can get to it by launching the first problem from the website; otherwise, it is hosted at [warp.delorean.codes/u/<username>](warp.delorean.codes/u/<username>).
+Arguably the easiest puzzle as the puzzles generally got harder as they progressed. You can get to it by launching the first problem from the website; otherwise, it is hosted at [warp.delorean.codes/u/\<username>](https://warp.delorean.codes/u/<username>) (replace \<username> with your username).
 
 Part 1
 ------
@@ -17,7 +17,7 @@ Another way to approach this problem would be just to load up an existing cypher
 - [quipquip](http://quipqiup.com)
 - [wordplays](http://www.wordplays.com/cryptogram)
 
-Putting your text in will mostly solve all of the text and you can replace the missing letters just by looking at the source text from the HackMIT [homepage](hackmit.org).
+Putting your text in will mostly solve all of the text and you can replace the missing letters just by looking at the source text from the HackMIT [homepage](https://hackmit.org).
 
 From either of these methods you will get the cypher then you just apply the cypher to the link below. Simply click the link and replace the wrong text with the real text (the last three letters should be jar). This will download a jar file.
 
@@ -28,6 +28,6 @@ Now we have a jar file. If you run the file it will just tell you "It's not your
 
 After getting your jar file decompiled, you see that it is trying to wait for some specific time before it shows. You can try to change your system time to match this, but an easier solution would be just to copy the print statement inside the if statement as it does not depend on the time in any way. I just copied it and put it into a compiler, I find [repl.it](repl.it) to be useful for this.
 
-After you run this, Presto you're done, the string will say something like "Your time is XXX 00 0000 00:00 XX." Take this string and enter it into the keypad back at [delorean.codes](delorean.codes) and you're done!
+After you run this, Presto you're done, the string will say something like "Your time is XXX 00 0000 00:00 XX." Take this string and enter it into the keypad back at [delorean.codes](https://delorean.codes) and you're done!
 
 
