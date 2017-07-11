@@ -6,7 +6,7 @@ This repository contains a writeup of our code/thinking throughout solving the p
 Brief Problem Summary
 ---------------------
 
-Here is a short summary of the problems and my difficulty rating out of 10.
+Here is a short summary of the problems, a list of some skills you might find helpful, and my difficulty rating out of 10 (where 10 would be I couldn't solve this in a day even if I had a gun to my head).
 
 - Problem 1 (1/10):
   * This was a good warmup, but anyone with enough googling and some knowledge of this type of puzzle could solve it. Someone relatively experienced would have no trouble. 
