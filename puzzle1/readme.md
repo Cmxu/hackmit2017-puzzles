@@ -10,9 +10,7 @@ The puzzle brings you to a copy of their home page with a custom, unreadable fon
 
 After copying the text, you will see that it is unreadable, instantly it looks like some sort of cipher text. So we tried to solve it using a substitution cipher.
 
-Using the clear text from the original website at [hackmit.org](https://hackmit.org), we created a mapping between characters. Sometimes this resulted in long chains of substitutions, e.g. a -> b -> c -> d. So we first found the path for each character and then sorted the order of application of the substitutions by ascending path length.
-
-See `solution.js`.
+Using the cleartext from the original website at [hackmit.org](https://hackmit.org), we found the necessary substitutions to decipher the URL. See `solution.js`.
 
 Another way to approach this problem would be just to load up an existing cipher solver such as
 
