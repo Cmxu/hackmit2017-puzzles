@@ -38,3 +38,14 @@ Next, a quick google search will show you how to use the two files in Keras (or 
 Part III - Hill Climbing
 ------------------------
 
+Hill climbing is a mathematical local search optimization technique, and for this problem we only need the most basic version (see [wikipedia](https://en.wikipedia.org/wiki/Hill_climbing) for more). The basic idea is that you have some function you want to optimize and you slowly pull yourself towards a maximum. If you still have no idea what I am talkinb about, imagine one of those contour maps for geography. Start at some random point on the map and move in a random direction. If you get higher stay there, if not go back. Repeat. This is an extremely niave approach, but it is enough to solve this problem pretty quickly.
+
+This process goes pretty fast, the only problem we ran into was scaling. This was remidied by the following hint on slack.
+
+```
+ANOTHER HINT: uint8
+```
+
+This essentially told us that their network was trained with pixel colors between 0 and 256 where I had been using 0 to 1. Otherwise, the general idea is to load their model. Generate a random point. Continue to generate a random movement, move there, see if it does better, then repeat. There are a few optimizations like lowering learning rate as you continue and things of this nature, but really these aren't too important and kinda hard to explain. See (CODE).
+
+Once you've generated your image, set it as your profile picture on [Tinbot](https://hotsinglebots.delorean.codes/u/<username>/profile) and then click through bots until you have one that prefers automobiles. Once you match with such a bot, *euraka*, the magic date appears.
