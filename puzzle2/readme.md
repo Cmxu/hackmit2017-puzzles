@@ -19,21 +19,35 @@ STORE-1294: Your login speed could be improved by immediately terminating if a[i
 Re: STORE-1294: fixed!
 ```
 
-At this point, with some prior experience and thinking we know that they are looking for a timing based attack. Basically, they are suggesting that their servers respond super fast and they have implemented this login speed "fix" which runs through the password you submit and terminates the moment it is wrong. This suggests that if you submit the correct first entry the server will take longer to respond, and then repeat this process till you find the passcode.
+We immediately recognized this as a [timing attack](https://en.wikipedia.org/wiki/Timing_attack). Basically, they are suggesting that it will take longer to compare two similar passwords (e.g. `abc1234` and `abc4213`) because it takes four comparisons vs. one comparison for dissimilar passwords (e.g. `1234acd` and `acd1234`). This is almost certainly not the case for a real application, as mere comparisons are very fast. (Though timing attacks can be viable in other cases and with larger samples.) 
 
-Initially, brute force seems infeasible as there are a total of 26 + 26 + 10 = 62 possible characters for an alphanumeric password (you find out they want alphanumeric the moment you submit a bad password of at least 6 characters). If there are anywhere from 6 to 12 characters with 62 possibilities for each, that means we are looking for anywhere from 5 x 10^10 to 3 x 10^21 passcodes. However, if instead we only have to try each character once per location we have at most 62 x 12 = 744 passcodes to try.
+To clarify, brute force would be infeasible as there are a total of 26 + 26 + 10 = 62 possible characters for an alphanumeric password (you find out they want alphanumeric the moment you submit a bad password of at least 6 characters). If there are anywhere from 6 to 12 characters with 62 possibilities for each, that means we are looking for anywhere from 5 x 10^10 to 3 x 10^21 passcodes. However, if instead we only have to try each character once per location we have at most 62 x 12 = 744 passcodes to try.
 
-So then lets whip up some code. We need to be able to record server response time... (ADD MORE). Since the times get longer and longer, this method still takes quite a bit of time to run.
+So we tried one character per location and picked the one with the greatest server response time (in milliseconds).
 
-Our code could be improved since after our initial attempts it seems obvious that the timings increase by 0.5 seconds each time, so you could stop prematurely, halving the time on average. It could also be down concurrently with node although I'm not sure how server times would be affected by this.
+We attempted to solve this using `time` and `curl` in a small bash script, which was not successful.
 
-Using this method, you have to find the passcodes for both Marty and Biff and then you're in.
+So then let's write some code. We need to be able to record server response time. The node.js `request` package provides `res.elapsedTime`, exactly what we need. We start with a single character and work our way up the whole 10-chararacter password. It seems that each comparison is artifically slowed down to take an additional 500ms.
+
+Since the times get longer and longer, this method still takes quite a bit of time to run. You know you're headed in the right direction if the log in attempt takes a long time. If the script is running quickly, you've probably made a mistake.
+
+Our code could be improved since after our initial attempts it seems obvious that the timings increase by 0.5 seconds for each character, so you could stop at the first slow response, halving the time on average. We could have also done the requests concurrently, though we were unsure if this would affect response times (probably not on the order of 0.5 seconds).
+
+Using this method, you have to find the passcodes for both Marty and Biff and then you're in. It also required modifying our script manually, since network noise could cause anomalous results.
 
 Part 2
 ------
 
-Now that you're in you're lead to a new page (Maybe say the page here, I can't get in right now D:). It's like a store, each account will have 50 hackcoins and you can transfer the coins between the two accounts; however, it becomes immediately obvious that you can only have 100 in either account at any time, and the store says that you can buy the solution for 1000 hackcoins. 
+Now that you're in you're lead to a new page, the HackStore, showing your balance of hackcoins. Each account will have 50 hackcoins and you can transfer the coins between the two accounts; however, it becomes immediately obvious that you can only have 100 in either account at any time. The store says that you can only buy the solution for 1000 hackcoins. 
 
-You need to find a way to get 1000 hackcoins. The first thing that you notice is that there are two accounts and a transfer button, this immediately suggests an attack where you might flood the server with transfer requests in order to cause it to transfer your amount multiple times. In fact, this is the solution. Using Node, you can do this relatively easily to get enough coins.
+You need to find a way to get 1000 hackcoins. How could you possibly hack a sytem that only lets you transfer money back and forth?It depends on how the system was implemented on the server side. When is the other person's account balance updated? Before or after the balance of your account is updated? Say the query to add coins to Biff's account is executed *before* the query to reduce your account balance. That means there is some amount of time where Biff's account has your coins, but your account hasn't had its balance reduced yet. What if you made several rapid requests, so that you transfer twice before your account balance is updated?
 
-Once you have enough coins, buy the solution and Voila they give you the time. Go back to the homepage and submit it.
+Turns out that's the solution. Not much to it!
+
+```
+while true; do curl -X POST -F "to=biff_tannen" https://store.delorean.codes/u/<username>/transfer &; done
+```
+
+The & runs each curl instance in the background, so you are in essence running many requests in parallel. Terminate this after a few seconds and you should have plentiful hackcoins. You could probably juggle transfers between Biff and Marty to get an even larger quantity of hackcoins (for no purpose).
+
+Once you have enough coins, buy the solution and *voila*they give you the time. Go back to the homepage and submit it.

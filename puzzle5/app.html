@@ -1,0 +1,124 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<style>
+    #logs {
+        background: lightgray;
+        position: absolute;
+        width: 100%;
+        height: 300px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px;
+        color: black;
+    }
+</style>
+
+<body>
+
+    <img id="captcha" width="300" height="150" style="border: 3px solid red;">
+    <img id="captcha2" width="300" height="150">
+    <img id="captcha3" width="300" height="150">
+
+    <div id="time_wasted"></div><br>
+
+    <form id="doone">
+        <input type="text" id="code" />
+        <input type="hidden" id="name" />
+        <input type="submit" id="submit" />
+    </form>
+
+    <pre id="logs">
+test
+</pre>
+</body>
+
+<script>
+    var solutions = []
+
+    function run(json) {
+
+
+        var i = 0;
+        var cur = json.images[i];
+        var captcha = document.getElementById('captcha');
+        var captcha2 = document.getElementById('captcha2');
+        var captcha3 = document.getElementById('captcha3');
+
+        captcha.setAttribute('src', 'data:image/jpeg;base64,' + cur.jpg_base64);
+
+
+        var time_wasted = document.getElementById('time_wasted');
+        var code = document.getElementById('code');
+        var hidden = document.getElementById('hidden');
+        var doone = document.getElementById('doone');
+
+        console.log = function(x) {
+            logs.innerText = x + '\n' + logs.innerText;
+        }
+
+        code.focus();
+        doone.onsubmit = function(e) {
+            e.preventDefault();
+            var got = code.value;
+
+
+            onres(cur.name, got);
+            return false;
+        }
+
+        function onres(name, val) {
+
+            console.log(name + ': ' + val);
+            i += 1;
+
+            time_wasted.innerHTML = i;
+            if (i == json.images.length) {
+                alert('done think of all the time you just wasted');
+                download(solutions, 'solutions', 'json');
+                return;
+            }
+
+            cur = json.images[i];
+            captcha.setAttribute('src', 'data:image/jpeg;base64,' + cur.jpg_base64);
+            captcha2.setAttribute('src', 'data:image/jpeg;base64,' + json.images[i + 1].jpg_base64);
+            captcha3.setAttribute('src', 'data:image/jpeg;base64,' + json.images[i + 2].jpg_base64);
+            code.value = "";
+            code.focus();
+
+            if (val.length == 4) {
+                solutions.push({
+                    name: name,
+                    solution: val
+                });
+            }
+        }
+
+    }
+
+    function download(data, filename, type) {
+        var file = new Blob([JSON.stringify(data)], {
+            type: type
+        });
+        if (window.navigator.msSaveOrOpenBlob) // IE10+
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        else { // Others
+            var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+
+    jQuery.getJSON('file:///Users/Asher/Documents/Projects/hackmit/5/hackmit2017/challenge.json', function(d) {
+        run(d);
+    });
+</script>
