@@ -25,9 +25,9 @@ To clarify, brute force would be infeasible as there are a total of 26 + 26 + 10
 
 So we tried one character per location and picked the one with the greatest server response time (in milliseconds).
 
-We attempted to solve this using `time` and `curl` in a small bash script, which was not successful.
+We attempted to solve this using `time` and `curl` in a small bash script, which was not successful. The timings were too inconsitent, and even though it could have lead to a solution we chose to move on.
 
-So then let's write some code. We need to be able to record server response time. The node.js `request` package provides `res.elapsedTime`, exactly what we need. We start with a single character and work our way up the whole 10-chararacter password. It seems that each comparison is artifically slowed down to take an additional 500ms.
+So then let's whip up some code. We need to be able to record server response time. The node.js `request` package provides `res.elapsedTime`, exactly what we need. We start with a single character and work our way up the whole 10-chararacter password. It seems that each comparison is artifically slowed down to take an additional 500ms.
 
 Since the times get longer and longer, this method still takes quite a bit of time to run. You know you're headed in the right direction if the log in attempt takes a long time. If the script is running quickly, you've probably made a mistake.
 
