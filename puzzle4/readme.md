@@ -3,7 +3,7 @@ Puzzle 4
 
 Finally, we get into the realm of machine learning. The puzzle is hosted on [hotsinglebots.delorean.codes/u/\<username>](https://hotsinglebots.delorean.codes/u/<username>), a site aptly named Tinbot. On the surface, this puzzle is cleverly designed as a stripped down version of tinder, giving you the ability to set a profile picture and to try to match with the bots. After playing around for a bit and uploading some images, you might get some matches but it's hard to see what is going on.
 
-Part 1 - Understanding the Problem
+Part I - Understanding the Problem
 ----------------------------------
 
 Checking the console on the webpage while clicking through bots shows us that each bot excepts some label. Clicking through a lot we get this list of possible labels.
@@ -16,8 +16,8 @@ If you have any familiarity with machine learning and have done problems, these 
 
 Just for understanding the problem, we wrote a quick script which submits a profile picture given the label so it matches with each bot. See [preliminary.js](preliminary.js). However, doing this we found we never matched with bots that prefer automobiles. This turns out to be the challenge of this puzzle: to submit an image that will match with a bot that prefers automobiles. 
 
-Part 2 - Loading up Keras
--------------------------
+Part II - Loading up Keras
+--------------------------
 
 We now must find an image that the bots see as an automobile. Although it might be possible to get luckly while trying random images, the key to this puzzle is again to inspect the page source in which you will find this comment at the very top.
 
@@ -35,6 +35,6 @@ pip install keras tensorflow
 
 Next, a quick google search will show you how to use the two files in Keras (or you could look at our code). The two files together create a pretrained model. In Keras, you give the model an image and it spits out an array with 10 entries. Each entry is a weight for a specific class, and it predicts your image to be the entry with the highest weight. Some quick playing around and you'll find that the problem can be reduced to trying to find an image which maximizes the second entry in the array (or 1st entry is counting from 0) or just makes that entry larger than all the others. Thus, we implement a simple Hill Climbing Algorithm to find such an image.
 
-Part 3 - Hill Climbing
-----------------------
+Part III - Hill Climbing
+------------------------
 
