@@ -26,7 +26,7 @@ Here is a short summary of the problems, a list of some skills you might find he
 
 Obviously, there were many solutions to all of these problems and so the difficulty rating is pretty subjective; it also depends on your skill level with each of the tools used.
 
-<sup>1</sup>We have heard that you can reverse engineer this, the MD5 hash being a key step.
+<sup>1</sup>We have heard that you can reverse engineer this, MD5 hashing being a key step.
 
 Disclaimer
 ----------
