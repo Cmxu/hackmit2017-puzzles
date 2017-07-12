@@ -20,7 +20,7 @@ Here is a short summary of the problems, a list of some skills you might find he
   * A bit hard to wrap your head around at first, but a brute force solution can crack this problem. You need to do a bit of searching if you haven't seen Back to the Future. There is probably a pattern, but brute force was sufficient for us.
   * Useful Skills: Node/JavaScript/cURL, Dictionary Lookup, Sets
 - Problem 4 (5/10):
-  * This problem should be relatively easy for a basic machine learning student with a grasp of Keras. Even for a begineer, not much prior knowledge is needed. A bit of googling can help to find the solution; however, this is quite a bit of a step up theoritically compared to the last few.
+  * This problem should be relatively easy for a basic machine learning student with a grasp of Keras. Even for a beginner, not much prior knowledge is needed. A bit of googling can help to find the solution; however, this is quite a bit of a step up theoritically compared to the last few.
   * Useful Skills: Machine Learning (Convolutional Neural Networks), Keras, Gradient Ascent (or Hill Climbing), Python
 - Problem 5 (8/10):
   * This problem is hard to rate. On one hand, a monkey could do this with enough time using brute force; in fact, almost anyone could do it within 10-12 hours as long as they can type at a decent clip and aren't afraid of going clinically insane. There are also many solutions to this problem. We chose one of the harder ones to implement and it was not obvious at all how to approach this problem unlike the other ones.
