@@ -29,7 +29,7 @@ We attempted to solve this using `time` and `curl` in a small bash script, which
 
 So then let's whip up some code. We need to be able to record server response time. The node.js `request` package provides `res.elapsedTime`, exactly what we need. We start with a single character and work our way up the whole 10-chararacter password. It seems that each comparison is artifically slowed down to take an additional 500ms.
 
-Since the times get longer and longer, this method still takes quite a bit of time to run. You know you're headed in the right direction if the log in attempt takes a long time. If the script is running quickly, you've probably made a mistake.
+Since the times get longer and longer, this method still takes quite a bit of time to run. You know you're headed in the right direction if the log in attempt takes a long time. If the script is running quickly, you've probably made a mistake. See [time.js](time.js).
 
 Our code could be improved since after our initial attempts it seems obvious that the timings increase by 0.5 seconds for each character, so you could stop at the first slow response, halving the time on average. We could have also done the requests concurrently, though we were unsure if this would affect response times (probably not on the order of 0.5 seconds).
 
