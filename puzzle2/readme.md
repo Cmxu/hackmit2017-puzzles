@@ -3,8 +3,8 @@ Puzzle 2
 
 After completing the first puzzle, the second puzzle can now be launched. This will bring you to [store.delorean.codes/u/\<username>/login](https://store.delorean.codes/u/<username>/login) (again change <username> field).
 
-Part 1
-------
+Part I - Timing is Key
+----------------------
 
 You are now faced with a login page where you must choose between logging in as Marty or Biff. The top of the page gives an interesting clue
 
@@ -35,8 +35,8 @@ Our code could be improved since after our initial attempts it seems obvious tha
 
 Using this method, you have to find the passcodes for both Marty and Biff and then you're in. It also required modifying our script manually, since network noise could cause anomalous results.
 
-Part 2
-------
+Part II - Overflow
+------------------
 
 Now that you're in you're lead to a new page, the HackStore, showing your balance of hackcoins. Each account will have 50 hackcoins and you can transfer the coins between the two accounts; however, it becomes immediately obvious that you can only have 100 in either account at any time. The store says that you can only buy the solution for 1000 hackcoins. 
 
@@ -44,10 +44,10 @@ You need to find a way to get 1000 hackcoins. How could you possibly hack a syte
 
 Turns out that's the solution. Not much to it!
 
-```
+```bash
 while true; do curl -X POST -F "to=biff_tannen" https://store.delorean.codes/u/<username>/transfer &; done
 ```
 
 The & runs each curl instance in the background, so you are in essence running many requests in parallel. Terminate this after a few seconds and you should have plentiful hackcoins. You could probably juggle transfers between Biff and Marty to get an even larger quantity of hackcoins (for no purpose).
 
-Once you have enough coins, buy the solution and *voila*they give you the time. Go back to the homepage and submit it.
+Once you have enough coins, buy the solution and *voila* they give you the time. Go back to the homepage and submit it.
