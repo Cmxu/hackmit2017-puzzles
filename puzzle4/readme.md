@@ -12,7 +12,7 @@ Checking the console on the webpage while clicking through bots shows us that ea
 airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck
 ```
 
-If you have any familiarity with machine learning and have done problems, these labels probably look familiar to you, but you could also google them and find a popular dataset called Ciphar-10. If you submit the correct image for each bot given the label they want, you'll match with that bot.
+If you have any familiarity with machine learning and have done problems, these labels probably look familiar to you, but you could also google them and find a popular dataset called [CIPHAR-10](https://www.cs.toronto.edu/~kriz/cifar.html). If you submit the correct image for each bot given the label they want, you'll match with that bot.
 
 Just for understanding the problem, we wrote a quick script (ADD REFERENCE) which submits a profile picture given the label so it matches with each bot. However, doing this we find we never match with bots that prefer automobiles. This turns out to be the challenge of this puzzle, to submit an image that will match with a bot that prefers automobiles.
 
