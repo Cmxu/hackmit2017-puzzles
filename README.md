@@ -5,9 +5,12 @@ This repository contains a writeup of our code/thinking throughout solving the p
 
 Please excuse our terrible code, this was made under extreme time pressure!
 
-### Spoilers
+Disclaimer
+----------
 
-Obviously, spoilers from here down and the rest of the repository, continue at your own risk.
+We are not the creators of these puzzles and these are not the official solutions by any means. In fact, the problem writers and other solvers will probably post faster and better solutions to these problems, but we'd just like to share our approaches as we worked on them for two days straight. We would like to thank the creators for making such interesting puzzles and putting in the time and effort to host this contest.
+
+Also, obviously spoilers from here down and the rest of the repository, continue at your own risk.
 
 Brief Problem Summary
 ---------------------
@@ -33,8 +36,3 @@ Here is a short summary of the problems, a list of some skills you might find he
 Obviously, there were many solutions to all of these problems and so the difficulty rating is pretty subjective; it also depends on your skill level with each of the tools used.
 
 <sup>1</sup>We have heard that you can reverse engineer this problem (removing the fun and educational part), MD5 hashing being a key step.
-
-Disclaimer
-----------
-
-We are not the creators of these puzzles and these are not the official solutions by any means. In fact, the problem writers and other solvers will probably post faster and better solutions to these problems, but we'd just like to share our approaches as we worked on them for two days straight. We would like to thank the creators for making such interesting puzzles and putting in the time and effort to host this contest.
