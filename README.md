@@ -6,27 +6,29 @@ This repository contains a writeup of our code/thinking throughout solving the p
 Brief Problem Summary
 ---------------------
 
-Here is a short summary of the problems, a list of some skills you might find helpful, and my difficulty rating out of 10 (where 10 would be I couldn't solve this in a day even if I had a gun to my head).
+Here is a short summary of the problems, a list of some skills you might find helpful, and my difficulty rating out of 10 (where 10 would be "I couldn't solve this in a day even if I had a gun to my head").
 
 - Problem 1 (1/10):
-  * This was a good warmup, but anyone with enough googling and some knowledge of this type of puzzle could solve it. Someone relatively experienced would have no trouble. 
-  * Useful Skills: Substitution Cipher, Reading HTML, Decompiling Jar Files, Understanding Java Code.
+  * This was a good warmup, but anyone with enough googling and some knowledge of this type of puzzle could solve it. Someone relatively experienced would have no trouble.
+  * Useful Skills: Substitution Cipher, Reading HTML, Decompiling JAR Files, Understanding Java
 - Problem 2 (2/10):
   * Another good warmup, the hints and setup really give the puzzle away; however, you need to have some understanding of web programming in order to solve this.
-  * Useful Skills: Node/Javascript/Curl, Timing Attacks, Concurrent Requests
+  * Useful Skills: Node/JavaScript/cURL, Timing Attacks, Concurrency
 - Problem 3 (3/10):
   * A bit hard to wrap your head around at first, but a brute force solution can crack this problem. You need to do a bit of searching if you haven't seen Back to the Future. There is probably a pattern, but brute force was sufficient for us.
-  * Useful Skills: Node/Javascript/Curl, Dictionary Lookup, Sets
+  * Useful Skills: Node/JavaScript/cURL, Dictionary Lookup, Sets
 - Problem 4 (5/10):
-  * This problem should be relatively easy for a basic machine learning student with a grasp of keras. Even for a begineer, not much prior knowledge is needed, a bit of googling can help to find the solution; however, this is quite a bit of a step up theoritically compared to the last few.
-  * Useful Skills: Machine Learning (Convolutional Neural Networks), Keras, Gradient Ascent (or Hill Climbing)
+  * This problem should be relatively easy for a basic machine learning student with a grasp of Keras. Even for a begineer, not much prior knowledge is needed. A bit of googling can help to find the solution; however, this is quite a bit of a step up theoritically compared to the last few.
+  * Useful Skills: Machine Learning (Convolutional Neural Networks), Keras, Gradient Ascent (or Hill Climbing), Python
 - Problem 5 (8/10):
   * This problem is hard to rate. On one hand, a monkey could do this with enough time using brute force; in fact, almost anyone could do it within 10-12 hours as long as they can type at a decent clip and aren't afraid of going clinically insane. There are also many solutions to this problem. We chose one of the harder ones to implement and it was not obvious at all how to approach this problem unlike the other ones.
-  * Useful Skills: Convolutional Neural Networks, Keras/Theano/Tensorflow/Other Machine Learning Toolkit, md5 Hash, OCR
+  * Useful Skills: Convolutional Neural Networks, Keras/Theano/Tensorflow/Other Machine Learning Toolkit, Hashing<sup>1</sup>, OCR
 
-Obviously, there were many solutions to all of these problems and so the difficulty rating is pretty subjective, it also depends on your skill level with each of the tools used.
+Obviously, there were many solutions to all of these problems and so the difficulty rating is pretty subjective; it also depends on your skill level with each of the tools used.
+
+<sup>1</sup>We have heard that you can reverse engineer this, the MD5 hash being a key step.
 
 Disclaimer
 ----------
 
-We are not the creators of these puzzles and these are not the official solutions by any means, in fact the problem writers and other solvers will probably post faster and better solutions to these problems, but we'd just like to share our approaches as we worked on them for 2 days straight. We would like to thank the creators for creating such interesting puzzles and putting the time and effort in to host this contest.
+We are not the creators of these puzzles and these are not the official solutions by any means. In fact, the problem writers and other solvers will probably post faster and better solutions to these problems, but we'd just like to share our approaches as we worked on them for two days straight. We would like to thank the creators for making such interesting puzzles and putting in the time and effort to host this contest.
