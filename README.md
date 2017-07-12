@@ -5,6 +5,10 @@ This repository contains a writeup of our code/thinking throughout solving the p
 
 Please excuse our terrible code, this was made under extreme time pressure!
 
+### Spoilers
+
+Obviously, spoilers from here down and the rest of the repository, continue at your own risk.
+
 Brief Problem Summary
 ---------------------
 
