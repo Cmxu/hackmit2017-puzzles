@@ -46,9 +46,13 @@ So now we have the background. What's remaining is to remove the background, add
 
 What results is one of the cleaner results we have seen.
 
-(INSERT IMAGE (maybe also throughout, above))
+(INSERT IMAGE (maybe also throughout, above/below))
 
 ### Section B - Character Seperation
+
+Although it would be possible to directly feed each of the images into the training phase of the convolutional neural network, the learning would be slow and we would need much more data; however, if we instead parsed each image into individual characters we could train the network much faster.
+
+Since our images are relatively clean
 
 Part III - Convolutional Neural Networks
 ----------------------------------------
