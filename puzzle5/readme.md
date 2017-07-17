@@ -52,7 +52,7 @@ What results is one of the cleaner results we have seen.
 
 Although it would be possible to directly feed each of the images into the training phase of the convolutional neural network, the learning would be slow and we would need much more data; however, if we instead parsed each image into individual characters we could train the network much faster.
 
-Since our images are relatively clean
+Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the
 
 Part III - Convolutional Neural Networks
 ----------------------------------------
