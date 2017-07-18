@@ -52,7 +52,46 @@ What results is one of the cleaner results we have seen.
 
 Although it would be possible to directly feed each of the images into the training phase of the convolutional neural network, the learning would be slow and we would need much more data; however, if we instead parsed each image into individual characters we could train the network much faster.
 
-Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the
+Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the highest and lowest pixels. Next we have seperated the characters; however, some of them still are a bit weird especially when two characters touch each other. In order to solve this we only do the CAPTCHAS that the algorithm identifies as having 4 characters and for which each character fits into a 25 by 25 pixel box, this way we have a uniform shape to feed into the network.
 
 Part III - Convolutional Neural Networks
 ----------------------------------------
+
+Now we get to the fun part. We need to make a [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network) which will predict what each character is. It turns out that the textbook neural network will do here, we didn't do any tuning and it was able to train within 2-3 minutes on the CPU of a 12" Macbook. If you haven't used Keras before I would highly recommend checking it out, it makes this next step so easy. Using Keras I made the following model.
+
+```python
+model = Sequential()
+
+model.add(Conv2D(32, (3,3), input_shape=(25,25,1)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2,2)))
+
+model.add(Conv2D(32, (3,3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2,2)))
+
+model.add(Conv2D(64, (3,3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2,2)))
+
+model.add(Flatten())
+model.add(Dense(64))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+model.add(Dense(36))
+model.add(Activation('sigmoid'))
+```
+
+A basic cNN involves a Convolution Layer followed by an Activation Layer which typically uses Relu ([Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) and finally a Pooling Layer. We use this structure three times then follow it by a Dense (or normal neural network layer).
+
+Then we used Java to export two files. We want one file to contain the training data which will be a map or character image data to actually character and another file to contain the testing data which will be characters mapped to the name of the CAPTCHA they belong to. In Java we convert the data into a 25 by 25 boolean array in order to make it easier to train on and export.
+
+Since our niave algorithm only accepts about half the data, we will want to download about 30000 CAPTCHAS just to be safe. Then we can pass it in and generate our testing data. After that, we're pretty much done. We just train the network on the training data then run the testing data through it and output a solution file. See [cnn.py](cnn.py).
+
+That's it! You're all done, just upload the solution file to their endpoint with cURL or something else and you'll get the magic time.
+
+```bash
+
+```
+
+Thanks for reading!
