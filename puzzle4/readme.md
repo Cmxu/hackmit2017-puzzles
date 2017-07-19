@@ -38,16 +38,16 @@ Next, a quick google search will show you how to use the two files in Keras (or 
 Part III - Hill Climbing
 ------------------------
 
-Hill climbing is a mathematical local search optimization technique, and for this problem we only need the most basic version (see [wikipedia](https://en.wikipedia.org/wiki/Hill_climbing) for more). The basic idea is that you have some function you want to optimize and you slowly pull yourself towards a maximum. If you still have no idea what I am talkinb about, imagine one of those contour maps for geography. Start at some random point on the map and move in a random direction. If you get higher stay there, if not go back. Repeat. This is an extremely niave approach, but it is enough to solve this problem pretty quickly.
+Hill climbing is a mathematical local search optimization technique, and for this problem we only need the most basic version (see [wikipedia](https://en.wikipedia.org/wiki/Hill_climbing) for more). The basic idea is that you have some function you want to optimize and you slowly pull yourself towards a maximum. If you have no idea what I am talking about about, imagine one of those contour maps for geography. Start at some random point on the map and move in a random direction. If you get higher stay there, if not go back. Repeat. This is an extremely naive approach, but it is enough to solve this problem pretty quickly. A "better" solution might be to use [gradient ascent](https://en.wikipedia.org/wiki/Gradient_descent).
 
-This process goes pretty fast, the only problem we ran into was scaling. This was remidied by the following hint on slack.
+This process goes pretty fast, the only problem we ran into was scaling. This was remedied by the following hint on Slack:
 
 ```
 ANOTHER HINT: uint8
 ```
 
-This essentially told us that their network was trained with pixel colors between 0 and 256 where I had been using 0 to 1. Otherwise, the general idea is to load their model. Generate a random point. Continue to generate a random movement, move there, see if it does better, then repeat. In our code we also implemented a way to update the learning rate, but it turns out that we only had to do that when using 0 to 1 and the learning rate doesn't actually need to be changed for 0 to 256 as it converges quite quickly. There is also a stopper for the objective value but it doesn't matter when you stop it as long as the value for automobile is higher than the rest. See [hillclimb.py](hillclimb.py).
+This essentially told us that their network was trained with pixel colors between 0 and 255 where I had been using 0 to 1. Otherwise, the general idea is to load their model. Generate a random point. Continue to generate a random movement, move there, see if it does better, then repeat. In our code we also implemented a way to update the learning rate, but it turns out that we only had to do that when using 0 to 1 and the learning rate doesn't actually need to be changed for 0 to 255 as it converges quite quickly. There is also a stopper for the objective value but it doesn't matter when you stop it as long as the value for automobile is higher than the rest. See [hillclimb.py](hillclimb.py).
 
-Using this we get an image that looks something like this. ![alt text](pfp.jpg "Hot Automobile"). Which really looks like nothing, but at least it tricks the bots!
+Using this we get an image that looks something like this: ![alt text](pfp.jpg "Hot Automobile"). It really looks like nothing, but at least it tricks the bots!
 
-Once you've generated your image, set it as your profile picture on [Tinbot](https://hotsinglebots.delorean.codes/u/<username>/profile) and then click through bots until you have one that prefers automobiles. Once you match with such a bot, *euraka*, the magic date appears.
+Once you've generated your image, set it as your profile picture on [Tinbot](https://hotsinglebots.delorean.codes/u/<username>/profile) and then click through bots until you have one that prefers automobiles. Once you match with such a bot, *eureka*, the magic date appears.
