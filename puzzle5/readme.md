@@ -59,9 +59,15 @@ What results is one of the cleaner results we have seen.
 
 ### Section B - Character Seperation
 
-Although it would be possible to directly feed each of the images into the training phase of the convolutional neural network, the learning would be slow and we would need much more data; however, if we instead parsed each image into individual characters we could train the network much faster.
+Although it would be possible to train the convolutional neural network with entire CAPTCHAs, learning would be slow and we would need much more data; however, if we instead parse each image into individual characters, we could train the network much faster.
 
-Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the highest and lowest pixels. Next we have seperated the characters; however, some of them still are a bit weird especially when two characters touch each other. In order to solve this we only do the CAPTCHAs that the algorithm identifies as having 4 characters and for which each character fits into a 25 by 25 pixel box, this way we have a uniform shape to feed into the network.
+Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the highest and lowest pixels. Next we have seperated the characters; however, some of them still are a bit weird especially when two characters touch each other. In order to solve this we only do the CAPTCHAs that the algorithm identifies as having 4 characters and for which each character fits into a 25 by 25 pixel box. This way we have a uniform shape to feed into the network.
+
+
+![segmentation_fail/fail1.png](segmentation_fail/fail1.png)
+![segmentation_fail/fail2.png](segmentation_fail/fail2.png)
+![segmentation_fail/fail3.png](segmentation_fail/fail3.png)
+*It wasn't possible to separate the characters 100% of the time.*
 
 Part III - Convolutional Neural Networks
 ----------------------------------------
