@@ -8,7 +8,7 @@ You made it; it's the final puzzle and it's all about CAPTCHAs. The basic premis
 | Brute Force | For the masochists. The contest is over, it's not worth it anymore.                                                     |
 | Reverse Engineering (Hashing)     | A quick solution if you can find it, but not too satisfying in my opinion.                                              |
 | OCR         | [Tesseract](https://github.com/tesseract-ocr/) is good at this, but it requires a lot of work to achieve good accuracy. |
-| cNN         | Convolutional Neural Networks. This is it what we use in our solution below.                                            |
+| CNN         | Convolutional Neural Networks. This is it what we use in our solution below.                                            |
 
 Part I - Initial Steps
 ----------------------
@@ -45,7 +45,7 @@ The first thing you might notice is that all the CAPTCHAs have the same backgrou
 
 The first thing I did was convert the color images to grayscale. After making the images grayscale it is a lot easier to deal with them and the color does not affect the results in any way. Next, we want to calculate the background mask. We can do this in a few ways, but I choose to calculate the mode color of each pixel which turned out to work pretty well. The mode pixel will be the one that appears most commonly in all the images, in otherwords, the background.
 
-So now we have the background. What's remaining is to remove the background, add back pieces of the white lines that where part of characters and make the entire image into binary colors (black and white). The first part is easy, we can simply subtract the background from the image. Next in order to add back pieces of the white lines, we go through the entire image and for each pixel we count how many nearby pixels are also white. Then if a pixel was originally removed as background and it was part of a white line and it has enough nearby pixels we add it back to the image.
+So now we have the background. What's remaining is to remove the background and fix the places where the lines intersected the characters. We want a binary image, i.e. just 0 and 255. The first part is easy, we can simply subtract the background from the image. Next in order to add back pieces of the white lines, we go through the entire image and for each pixel we count how many nearby pixels are also white. Then if a pixel was originally removed as background *and* it was part of a white line *and* it has enough nearby pixels, we add it back to the image. This is essentially [dilation.](https://homepages.inf.ed.ac.uk/rbf/HIPR2/dilate.htm)
 
 What results is one of the cleaner results we have seen.
 
