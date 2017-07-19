@@ -43,13 +43,19 @@ This is where things start to get hectic. I tend to prefer Java for speed and al
 
 The first thing you might notice is that all the CAPTCHAs have the same background image which consists of 4 colored strips and also, annoyingly, a few white lines. So, we want to remove all of this from each captcha. What's annoying about the white lines is that removing them cuts into the characters in strange ways, but if you don't remove them they remain hard to read.
 
-The first thing I did was convert the color images to grayscale. After making the images grayscale it is a lot easier to deal with them and the color does not affect the results in any way. Next, we want to calculate the background mask. We can do this in a few ways, but I choose to calculate the mode color of each pixel which turned out to work pretty well. The mode pixel will be the one that appears most commonly in all the images, in otherwords, the background.
+The first thing I did was convert the color images to grayscale. After making the images grayscale it is a lot easier to deal with them as the color does not affect the results in any way. Next, we want to calculate the background mask. We can do this in a few ways, but I choose to calculate the mode color of each pixel which turned out to work pretty well. The mode pixel will be the one that appears most commonly in all the images, in other words, the background.
 
-So now we have the background. What's remaining is to remove the background and fix the places where the lines intersected the characters. We want a binary image, i.e. just 0 and 255. The first part is easy, we can simply subtract the background from the image. Next in order to add back pieces of the white lines, we go through the entire image and for each pixel we count how many nearby pixels are also white. Then if a pixel was originally removed as background *and* it was part of a white line *and* it has enough nearby pixels, we add it back to the image. This is essentially [dilation.](https://homepages.inf.ed.ac.uk/rbf/HIPR2/dilate.htm)
+![mode.png](mode.png)
+
+So now we have the background. What's remaining is to remove the background and fix the places where the lines intersected the characters. We want a binary image, i.e. just 0 and 255. The first part is easy, we can simply subtract the background from the image.
+
+![step1.jpg](step1.jpg)
+
+Next in order to add back pieces of the white lines, we go through the entire image and for each pixel we count how many nearby pixels are also white. Then if a pixel was originally removed as background *and* it was part of a white line *and* it has enough nearby pixels, we add it back to the image. This is essentially [dilation.](https://homepages.inf.ed.ac.uk/rbf/HIPR2/dilate.htm)
 
 What results is one of the cleaner results we have seen.
 
-(INSERT IMAGE (maybe also throughout, above/below))
+![step2.jpg](step2.jpg)
 
 ### Section B - Character Seperation
 
