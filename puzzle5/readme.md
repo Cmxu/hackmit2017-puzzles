@@ -85,7 +85,7 @@ Since our images are relatively clean we can apply a relatively simple character
 Part III - Convolutional Neural Networks
 ----------------------------------------
 
-Now we get to the fun part. We need to make a [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network) which will predict what each character is. It turns out that the textbook neural network will do here, we didn't do any tuning and it was able to train within 2-3 minutes on the CPU of a 12" Macbook. If you haven't used Keras before I would highly recommend checking it out, it makes this next step so easy. Using Keras I made the following model.
+Now we get to the fun part. We need to make a [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network) which will label each extracted character. It turns out that a textbook CNN will do here; we didn't do any tuning and it was able to train within 2-3 minutes on the CPU of a 12" MacBook (surprising?). If you haven't used Keras before I would highly recommend checking it out. It makes this next step so easy. Using Keras I made the following model:
 
 ```python
 model = Sequential()
@@ -110,16 +110,12 @@ model.add(Dense(36))
 model.add(Activation('sigmoid'))
 ```
 
-A basic cNN involves a Convolution Layer followed by an Activation Layer which typically uses Relu ([Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) and finally a Pooling Layer. We use this structure three times then follow it by a Dense (or normal neural network layer).
+A basic CNN involves a **convolution layer** followed by an **activation layer** which typically uses **ReLU** ([Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) and finally a **pooling layer**. We use this structure three times then follow it by a **dense layer** (or normal neural network layer).
 
-Then we used Java to export two files. We want one file to contain the training data which will be a map or character image data to actually character and another file to contain the testing data which will be characters mapped to the name of the CAPTCHA they belong to. In Java we convert the data into a 25 by 25 boolean array in order to make it easier to train on and export.
+We then needed to export two files (in Java): We want one file to contain the training data which will be a map of character image data to its label, and another file to contain the testing data which will be characters mapped to the name of the CAPTCHA they belong to. We converted the data into a 25 by 25 boolean array in order to make it easier to train on and export.
 
-Since our niave algorithm only accepts about half the data, we will want to download about 30000 CAPTCHAs just to be safe. Then we can pass it in and generate our testing data. After that, we're pretty much done. We just train the network on the training data then run the testing data through it and output a solution file. See [cnn.py](cnn.py).
+Since our naive algorithm only accepts about half the data (segmentation issues), we downloaded about 30,000 CAPTCHAs just to be safe. Then we can pass it in and generate our testing data. After that, we're pretty much done. We just train the network on the training data then run the testing data through it and output a solution file. See [cnn.py](cnn.py).
 
-That's it! You're all done, just upload the solution file to their endpoint with cURL or something else and you'll get the magic time.
-
-```bash
-
-```
+That's it! You're all done. Just upload the solution file to their endpoint with cURL or something else and you'll get the magic time.
 
 Thanks for reading!
