@@ -55,7 +55,7 @@ Next in order to add back pieces of the white lines, we go through the entire im
 
 What results is one of the cleaner results we have seen.
 
-![step2.jpg](step2.jpg)
+![step2.png](step2.png)
 
 ### Section B - Character Seperation
 
