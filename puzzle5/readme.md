@@ -72,6 +72,16 @@ Since our images are relatively clean we can apply a relatively simple character
 
 *It wasn't possible to separate the characters 100% of the time.*
 
+![segment/fail1.png](segment/1.png)
+
+![segment/fail2.png](segment/2.png)
+
+![segment/fail3.png](segment/3.png)
+
+![segment/fail4.png](segment/4.png)
+
+*We just threw out the ones that didn't have four segments.*
+
 Part III - Convolutional Neural Networks
 ----------------------------------------
 
