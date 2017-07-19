@@ -64,11 +64,11 @@ Although it would be possible to train the convolutional neural network with ent
 Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the highest and lowest pixels. Next we have seperated the characters; however, some of them still are a bit weird especially when two characters touch each other. In order to solve this we only do the CAPTCHAs that the algorithm identifies as having 4 characters and for which each character fits into a 25 by 25 pixel box. This way we have a uniform shape to feed into the network.
 
 
-![segmentation_fail/fail1.png](segmentation_fail/fail1.png)
+![segment_fail/fail1.png](segment_fail/fail1.png)
 
-![segmentation_fail/fail2.png](segmentation_fail/fail2.png)
+![segment_fail/fail2.png](segment_fail/fail2.png)
 
-![segmentation_fail/fail3.png](segmentation_fail/fail3.png)
+![segment_fail/fail3.png](segment_fail/fail3.png)
 
 *It wasn't possible to separate the characters 100% of the time.*
 
