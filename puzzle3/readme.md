@@ -20,7 +20,7 @@ You will also have a message which looks like the following.
 The ____ of _____ but like _____
 ```
 
-Your task is to encode the message with their unknown algorithm. As you try to enter codewords into the log, nothing seems to work, and all it returns is "ERROR READING." Careful examination of the table shows that there are the same number of words in the codewords as letters in the messages; furthermore, if you reset the log you will eventually notice that the order to the words doesn't matter. Finally, if you are familiar with the *Back to the Future* films, you might notice that all of the words (except "bob" kind of threw me off) come from the movie. 
+Your task is to encode the message with their unknown algorithm. As you try to enter codewords into the log, nothing seems to work; all it returns is "ERROR READING." Careful examination of the table shows that there are the same number of words in the codewords as letters in the messages; furthermore, if you reset the log you will eventually notice that the order of the words doesn't matter. Finally, if you are familiar with the *Back to the Future* films, you might notice that all of the words (except "bob" kind of threw me off) come from the movie. 
 
 #### DISCLAIMER
 
@@ -38,11 +38,11 @@ We noticed next that if we took codewords from the script of the movie, we could
 | the            | c                 |
 | future         | d                 |
 
-Now is where the mysterious "bob" comes in, as Bob Gale is a cowriter of the films so his name also appears in the screenplay. One of the biggest challenges we had in coming up with the correct solution was finding the screenplay/script that was used by the writers of this problem (at the moment this is still a mystery<sup>1</sup>). For example, in some versions of the script the word "catch" is written as "cat h", meaning that our algorithm would find *catch* where the word was actually *cat*. We created a list of unique words in the order that they appear in the script,  and then did a brute force search, slowly building up the desired string by finding the letters one at a time while searching through the set of words.
+Now is where the mysterious "bob" comes in, as Bob Gale is a cowriter of the films so his name also appears in the screenplay. One of the biggest challenges we had in coming up with the correct solution was finding the screenplay/script that was used by the writers of this problem (at the moment this is still a mystery<sup>1</sup>). For example, in some versions of the script the word "catch" is written as "cat h", meaning that our algorithm would find *catch* where the word was actually *cat*. We created a list of unique words in the order that they appear in the script, and then did a brute force search, slowly building up the desired string by finding the letters one at a time while searching through the set of words.
 
 The general idea is that the order of the words does not really matter, and that some word in the script corresponds with the next letter. By repeatedly making requests we could iteratively find the next letter.
 
 Then *tada*, you're done. The magic date appears and it's on to the next puzzle.
 
-<sup>1</sup>We found later as mentioned on the solvers group in slack that the script they used is actually [posted](https://the.delorean.codes/static/script.txt)
+<sup>1</sup>We found later, as mentioned on the solvers group in slack, that the script they used is actually [posted](https://the.delorean.codes/static/script.txt)
 
