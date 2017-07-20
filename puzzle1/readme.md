@@ -17,17 +17,15 @@ Another way to approach this problem would be just to load up an existing cipher
 - [quipquip](http://quipqiup.com)
 - [wordplays](http://www.wordplays.com/cryptogram)
 
-Putting your text in our tool or an existing tool will mostly solve all of the text and you can replace the missing letters just by looking at the source text from the HackMIT [homepage](https://hackmit.org).
-
-From either of these methods you will get the cipher then you just apply the cipher to the link below. Simply click the link and replace the wrong text with the real text (the last three letters should be jar). This will download a jar file.
+Our tool or an existing tool will most likely decipher all of the text if provided a sample of cleartext and ciphertext (see [contents.txt](contents.txt)). You can then decipher the link at the bottom of the page. This will download a JAR file.
 
 Part II - Decompiling Jars
 --------------------------
 
-Now we have a jar file. If you run the file it will just tell you "It's not your time ;)". So we decompiled the jar file to get a look at the code using. There are many ways you could approach this, but one common one would be to use a service like [JD-GUI](http://jd.benow.ca).
+Now we have a JAR file. If you run the file it will just tell you that "It's not your time ;)". So we decompiled the JAR file to get a look at the code. There are many ways you could approach this, but one common way would be to use a program like [JD-GUI](http://jd.benow.ca).
 
-After getting your jar file decompiled, you see that it is trying to wait for some specific time before it shows. You can try to change your system time to match this, but an easier solution would be just to copy and execute the print statement inside the if statement as it does not depend on the time in any way (if you have a java compiler open use that; otherwise, sites like [repl.it](https://repl.it) are very useful for something quick).
+After getting your JAR file decompiled, you can see that it waits for a specific time interval before executing a large part of the program. You can try to change your system time to match this, but an easier solution would be just to copy and execute the `System.out.print` statement inside the `i`f statement, as it does not depend on the time in any way (if you have Java installed, use that; otherwise, sites like [repl.it](https://repl.it) are very useful for something quick).
 
-After you run this, *presto* you're done, the string will say something like "Your time is XXX 00 0000 00:00 XX." Take this string and enter it into the keypad back at [delorean.codes](https://delorean.codes) and you're done!
+After you run this, *presto* you're done! The string will say something like "Your time is XXX 00 0000 00:00 XX." Take this string and enter it into the keypad back at [delorean.codes](https://delorean.codes).
 
 
