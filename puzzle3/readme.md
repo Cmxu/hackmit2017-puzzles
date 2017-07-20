@@ -44,5 +44,5 @@ The general idea is that the order of the words does not really matter, and that
 
 Then *tada*, you're done. The magic date appears and it's on to the next puzzle.
 
-<sup>1</sup>We found later, as mentioned on the solvers group in slack, that the script they used is actually [posted](https://the.delorean.codes/static/script.txt)
+<sup>1</sup>We found later from the solvers group on Slack that the script they used was actually [revealed](https://the.delorean.codes/static/script.txt) in the HTTP headers.
 
