@@ -1,7 +1,7 @@
 Puzzle 5
 ========
 
-You made it; it's the final puzzle and it's all about CAPTCHAs. The basic premise of this task is that you will need to solve CAPTCHAs. In fact, you will need to solve at least 10,000 of them in order to pass. This puzzle is unlike the others in the sense that the goal is not hidden, but it is hard in the sense that there is no set way to do this problem. So below I will provide a brief overview of some of the techniques we know about that worked.
+You made it; it's the final puzzle and it's all about CAPTCHAs. The basic premise of this task is that you will need to solve CAPTCHAs. In fact, you will need to solve at least 10,000 of them in order to pass. This puzzle is unlike the others in the sense that the goal is not hidden, but it is hard in the sense that there is no set way to do this problem. So below I will provide a brief overview of some of the techniques we know about that have worked.
 
 | Technique   | Comments                                                                                                                |
 |-------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -32,12 +32,12 @@ This is an example of what one of my CAPTCHAs looks like:
 
 ![captcha.jpg](captcha.jpg)
 
-Once you download a bunch of these CAPTCHAs, you enter the painful part. At one point during the competition we knew that if there were only 10 slots left we would have done all 10,000 by hand. Since we didn't know what to do yet, we wrote a quick app and started doing them by hand. It turns out that this was extremely useful training data for the convolutional neural network later. We each did 1,000, but only used one of those sets to actually train. I have saved you the trouble and included our training data.
+Once you download a bunch of these CAPTCHAs, you enter the painful part. At one point during the competition we knew that if there were only 10 slots left we would have to do all 10,000 by hand. Since we didn't know what to do yet, we wrote a quick app and started solving them by hand. It turns out that this was extremely useful training data for the convolutional neural network later. We each did 1,000 over the course of an hour, but only used one of those sets to actually train. I have saved you the trouble by including our training data ([solutions.json](solutions.json)).
 
 Part II - Preprocessing
 -----------------------
 
-This is where things start to get hectic. I tend to prefer Java for speed and also comfort so I started writing my preprocessor in Java but then used Python to do the machine learning so there will be some transfer back and forth between languages and passing of files.
+This is where things start to get hectic. I tend to prefer Java for speed and also comfort, so I started writing my preprocessor in Java, but then used Python to do the machine learning. Hence, there will be some transfer back and forth between languages and passing of files.
 
 ### Section A - Cleaning
 
@@ -47,13 +47,13 @@ The first thing I did was convert the color images to grayscale. After making th
 
 ![mode.png](mode.png)
 
-So now we have the background. What's remaining is to remove the background and fix the places where the lines intersected the characters. We want a binary image, i.e. just 0 and 255. The first part is easy, we can simply subtract the background from the image.
+So now we have the background. What's remaining is to remove the background and fix the places where the lines intersected the characters. We want a binary image, i.e. just 0 and 255. The first part is easy; we can simply subtract the background from the image.
 
 ![step1.jpg](step1.jpg)
 
-Next in order to add back pieces of the white lines, we go through the entire image and for each pixel we count how many nearby pixels are also white. Then if a pixel was originally removed as background *and* it was part of a white line *and* it has enough nearby pixels, we add it back to the image. This is essentially [dilation.](https://homepages.inf.ed.ac.uk/rbf/HIPR2/dilate.htm)
+Next, in order to add back pieces of the white lines, we go through the entire image and for each pixel we count how many nearby pixels are also white. Then if a pixel was originally removed as background *and* it was part of a white line *and* it has enough nearby pixels, we add it back to the image. This is essentially [dilation.](https://homepages.inf.ed.ac.uk/rbf/HIPR2/dilate.htm)
 
-What results is one of the cleaner results we have seen.
+What results is one of the cleaner outcomes we have seen.
 
 ![step2.png](step2.png)
 
@@ -61,7 +61,7 @@ What results is one of the cleaner results we have seen.
 
 Although it would be possible to train the convolutional neural network with entire CAPTCHAs, learning would be slow and we would need much more data; however, if we instead parse each image into individual characters, we could train the network much faster.
 
-Since our images are relatively clean we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right, when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the highest and lowest pixels. Next we have seperated the characters; however, some of them still are a bit weird especially when two characters touch each other. In order to solve this we only do the CAPTCHAs that the algorithm identifies as having 4 characters and for which each character fits into a 25 by 25 pixel box. This way we have a uniform shape to feed into the network.
+Since our images are relatively clean, we can apply a relatively simple character seperation algorithm. All we have to do is sweep the image from left to right; when we encounter a white pixel we begin a new character and continue this character until we encounter a line with all black pixels. During this sweep we also keep track of the highest and lowest pixels. Next we have seperated the characters; however, some of them still are a bit weird, especially when two characters touch each other. In order to solve this we only use the CAPTCHAs that the algorithm identifies as having 4 characters that each fit into a 25 by 25 pixel box. This way we have a uniform shape to feed into the network.
 
 
 ![segment_fail/fail1.png](segment_fail/fail1.png)
@@ -110,9 +110,9 @@ model.add(Dense(36))
 model.add(Activation('sigmoid'))
 ```
 
-A basic CNN involves a **convolution layer** followed by an **activation layer** which typically uses **ReLU** ([Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) and finally a **pooling layer**. We use this structure three times then follow it by a **dense layer** (or normal neural network layer).
+A basic CNN involves a **convolution layer** followed by an **activation layer** which typically uses **ReLU** ([Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) and finally a **pooling layer**. We use this structure three times followed by a **dense layer** (or normal neural network layer).
 
-We then needed to export two files (in Java): We want one file to contain the training data which will be a map of character image data to its label, and another file to contain the testing data which will be characters mapped to the name of the CAPTCHA they belong to. We converted the data into a 25 by 25 boolean array in order to make it easier to train on and export.
+We then needed to export two files (in Java). We wanted one file to contain the training data, which will be a map of character image data to its label, and another file to contain the testing data, which will be characters mapped to the name of the CAPTCHA they belong to. We converted the data into a 25 by 25 boolean array in order to make it easier to train on and export.
 
 Since our naive algorithm only accepts about half the data (segmentation issues), we downloaded about 30,000 CAPTCHAs just to be safe. Then we can pass it in and generate our testing data. After that, we're pretty much done. We just train the network on the training data then run the testing data through it and output a solution file. See [cnn.py](cnn.py).
 
