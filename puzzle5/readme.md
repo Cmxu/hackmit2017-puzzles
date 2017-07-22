@@ -85,7 +85,7 @@ Since our images are relatively clean, we can apply a relatively simple characte
 Part III - Convolutional Neural Networks
 ----------------------------------------
 
-Now we get to the fun part. We need to make a [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network) which will label each extracted character. It turns out that a textbook CNN will do here; we didn't do any tuning and it was able to train within 2-3 minutes on the CPU of a 12" MacBook (surprising?). If you haven't used Keras before I would highly recommend checking it out. It makes this next step so easy. Using Keras I made the following model:
+Now we get to the fun part! We decided to use a Convolutional Neural Network to recognize the characters we extracted. It turns out that an essentially [textbook](http://cs231n.github.io/convolutional-networks/) CNN will do here; no tuning was necessary, and to our surprise, it trained in 2-3 minutes on the CPU of a 12" MacBook. If you haven't used Keras before, I would highly recommend checking it out. It makes this next step so easy. Using Keras, I made the following model:
 
 ```python
 model = Sequential()
@@ -110,11 +110,11 @@ model.add(Dense(36))
 model.add(Activation('sigmoid'))
 ```
 
-A basic CNN involves a **convolution layer** followed by an **activation layer** which typically uses **ReLU** ([Rectified Linear Unit](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) and finally a **pooling layer**. We use this structure three times followed by a **dense layer** (or normal neural network layer).
+A basic CNN consists of a **convolutional layer** followed by a [ReLU](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) **activation layer** and finally a **pooling layer**. We repeated this structure three times, followed by a **dense layer** (or a *fully connected layer*).
 
-We then needed to export two files (in Java). We wanted one file to contain the training data, which will be a map of character image data to its label, and another file to contain the testing data, which will be characters mapped to the name of the CAPTCHA they belong to. We converted the data into a 25 by 25 boolean array in order to make it easier to train on and export.
+We then needed to export two files: one containing our training set, which had labeled character images, and another containing the CAPTCHAs to be solved, containing the `name` of the CAPTCHA and the four extracted image segments. The image data was simply stored as a 25x25 boolean array.
 
-Since our naive algorithm only accepts about half the data (segmentation issues), we downloaded about 30,000 CAPTCHAs just to be safe. Then we can pass it in and generate our testing data. After that, we're pretty much done. We just train the network on the training data then run the testing data through it and output a solution file. See [cnn.py](cnn.py).
+Since our algorithm only accepted about half of the data due to segmentation issues, we downloaded about 30,000 CAPTCHAs just to be safe. We passed these to our algorithm (cleaning -> separation -> CNN) and took the ones that were successfully processed. Our model achieved high (~90%) accuracy on our training set. Due to time constraints, we were not concerned with test and validation sets; we were successful in submitting the first results without tuning the network in any way. By iteratively reducing the size of our submitted dataset, we determined that we had ~75% accuracy on the real data (with ~66% being necessary). 
 
 That's it! You're all done. Just upload the solution file to their endpoint with cURL or something else and you'll get the magic time.
 
